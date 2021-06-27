@@ -52,7 +52,7 @@ var stm = must.Rsvps(function(rsvp) {
     	var depth = Math.min(rsvps.length, 60);
         if (depth > 1) {
         	var rate = (depth - 1) * 60 * 1000 / (rsvps[rsvps.length-1].time - rsvps[rsvps.length - depth].time);
-            $("#r").text(Math.round(rate));
+            // $("#r").text(Math.round(rate));
         }
 
         var details = $("#rsvp-detail"),
@@ -61,7 +61,7 @@ var stm = must.Rsvps(function(rsvp) {
               details.prepend(detail);
               detail.css({opacity:0}).animate({height:'toggle', opacity:1}, 500, function() {
                 details.children().each(function(idx) {
-                  if (idx > 10) $(this).remove();
+                  if (idx > 1) $(this).remove();
                 });
                   details = null;
               });
@@ -71,8 +71,8 @@ var stm = must.Rsvps(function(rsvp) {
     }
 });
 
-$(window).bind("unload", function() {
-  $("*").add(document).unbind();
+$(window).on("unload", function() {
+  $("*").add(document).off();
 });
 setTimeout(function() {
   // you win, memory leaks! (reload after 6 hours)
