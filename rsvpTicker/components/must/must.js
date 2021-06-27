@@ -79,6 +79,7 @@
     if (supportsWebsockets()) {
       if (config.params)
         wsUrl = wsUrl + "?" + $.param(config.params);
+        console.log(wsUrl, "heheheheh")
         var s = window.WebSocket ? new WebSocket(wsUrl) : new MozWebSocket(wsUrl);
         s.onmessage = function(e) {
           if (stopping) {
