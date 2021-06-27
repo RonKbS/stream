@@ -1,4 +1,5 @@
-var details = $("#details"), uuid = 0, rsvps = [], cleanupInterval = 2000, domrm = function(rid) {
+var details = $("#details"), uuid = 0, meetMarkers = [], rsvps = [],
+cleanupInterval = 2000, domrm = function(rid) {
     var p = $("#"+rid);
     p.animate({opacity:0, svgR:0}, 1500, function() {
         if(p.HasBubblePopup()) {
@@ -37,7 +38,7 @@ var stm = must.Rsvps(function(rsvp) {
     	 	imgCode = '<img src="'+rsvp.member.photo+'" />';
         }
 
-		msg = ['<div class="rsvp"><span class="member-photo">',imgCode,
+        msg = ['<div class="rsvp"><span class="member-photo">',imgCode,
 				 '</span><div class="member-info"> <span class="member">', rsvp.member.member_name,
                  '</span><span class="will-mup"> will meetup with</span><br/> ',
                  '<span class="group">', rsvp.group.group_name,
@@ -65,6 +66,15 @@ var stm = must.Rsvps(function(rsvp) {
                 });
                   details = null;
               });
+
+            //   add to map
+            if (meetMarkers.length === 10) {
+                meetupMap.removeLayer(meetMarkers[meetMarkers.length - 1]);
+                meetMarkers.pop()
+            }
+            meetMarkers.unshift(L.marker(
+                [rsvp.group.group_lat, rsvp.group.group_lon]
+            ).addTo(meetupMap));
 
             };
           setTimeout(showDetail, 500);

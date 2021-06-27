@@ -2,12 +2,13 @@
 
 let meetupMap = L.map(
   'mapid', {
-  // zoomControl: false,
-  dragging: true,
-  doubleClickZoom: false,
-  boxZoom: false,
+    zoomControl: false,
+    dragging: false,
+    doubleClickZoom: false,
+    boxZoom: false,
+    doubleClickZoom: false
 }
-).setView([44.33, 4.32], 2);
+).setView([23.56, 107.57], 2);
 
 
 L.tileLayer('https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
