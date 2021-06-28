@@ -59,7 +59,7 @@
       host     = config.host  || "https://stream.meetup.com",
       path     = config.path  || "/2/rsvps"
       url      = config.url   || host + path,
-      wsUrl    = config.wsUrl || url.replace(/^http/, 'wss'),
+      wsUrl    = config.wsUrl || url.replace(/^http/, 'ws'),
       log      = config.log   || function(msg) { },
       stopping = false,
       error = config.error || function(msg) {
