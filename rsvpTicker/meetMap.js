@@ -24,6 +24,7 @@ let meetups = L.control({ position: "bottomright" });
 meetups.onAdd = map => {
   let div_ = L.DomUtil.create('div');
   div_.id = "rsvp-detail"
+  div_.innerHTML = "<h6>streaming meetups</h6>"
   return div_
 }
 meetups.addTo(meetupMap);

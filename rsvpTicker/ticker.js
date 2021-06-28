@@ -59,22 +59,23 @@ var stm = must.Rsvps(function(rsvp) {
         var details = $("#rsvp-detail"),
             detail = $(msg).hide(),
             showDetail = function() {
-              details.prepend(detail);
-              detail.css({opacity:0}).animate({height:'toggle', opacity:1}, 500, function() {
-                details.children().each(function(idx) {
-                  if (idx > 1) $(this).remove();
-                });
-                  details = null;
-              });
+            let popup = L.popup()
+                // .setLatLng(latlng)
+                .setContent(msg)
 
             //   add to map
             if (meetMarkers.length === 10) {
                 meetupMap.removeLayer(meetMarkers[meetMarkers.length - 1]);
                 meetMarkers.pop()
             }
+            meetMarkers.forEach(marker => marker.closeTooltip())
             meetMarkers.unshift(L.marker(
                 [rsvp.group.group_lat, rsvp.group.group_lon]
-            ).addTo(meetupMap));
+            ).bindPopup(popup).addTo(meetupMap));
+            meetMarkers[0].bindTooltip(
+                `${rsvp.member.member_name} will meetup with
+                 ${rsvp.group.group_name} in ${rsvp.group.group_city}`
+            ).openTooltip(); //To open the tooltip
 
             };
           setTimeout(showDetail, 500);
